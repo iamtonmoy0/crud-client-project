@@ -1,33 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    const form= e.target;
+    const name=form.name.value;
+    const email=form.email.value;
+    const user={name,email}
+    console.log(name,email)
+    fetch('http://localhost:3000/user',{
+      method:'POST',
+      headers:{
+        'content-type':'application/json'
+      },
+      body:JSON.stringify(user)
+    })
+    .then(res=>res.json())
+    .then(data=>console.log(data))
+    form.reset()
+
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+     <form onSubmit={handleSubmit}>
+      <input type="text" name="name" id="name" placeholder='enter your name' />
+      <input type="email" name="email" id="email" placeholder='enter your name' />
+      <input type="submit" value="add user" />
+
+
+     </form>
     </>
   )
 }
