@@ -1,3 +1,5 @@
+import { ToastContainer, toast } from 'react-toastify';
+ import 'react-toastify/dist/ReactToastify.css';
 import './App.css'
 
 function App() {
@@ -18,13 +20,20 @@ function App() {
       body:JSON.stringify(user)
     })
     .then(res=>res.json())
-    .then(data=>console.log(data))
-    form.reset()
+    .then(data=>{
+      console.log(data)
+    //check user insert
+    if(data.insertedId){
+      toast.success('user successfully added')
+      form.reset()
+    }
+  })
 
   }
 
   return (
     <>
+    <ToastContainer/>
      <form onSubmit={handleSubmit}>
       <input type="text" name="name" id="name" placeholder='enter your name' />
       <input type="email" name="email" id="email" placeholder='enter your name' />
