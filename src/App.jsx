@@ -7,12 +7,13 @@ function App() {
     const form= e.target;
     const name=form.name.value;
     const email=form.email.value;
-    const user={name,email}
+    const user={name,email};
     console.log(name,email)
-    fetch('http://localhost:3000/user',{
+    // data fetch and method defined 
+    fetch('http://localhost:5000/users',{
       method:'POST',
       headers:{
-        'content-type':'application/json'
+        'Content-Type' : 'application/json',
       },
       body:JSON.stringify(user)
     })
