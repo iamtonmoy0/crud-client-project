@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
 
 const Users = () => {
-	const users=useLoaderData();
+	const usersData=useLoaderData();
+	const [user,setUser]=useState(usersData)
 
 	const handleDel=_id=>{
 		console.log(_id)
@@ -14,15 +16,17 @@ const Users = () => {
 		.then(data=>{console.log(data)
 		if(data.deletedCount>0){
 			toast.success('deleted success')
+			const remaining = user.filter(u => u._id !== _id);
+			setUser(remaining)
 		}
 	})
 	}
 	return (
 		<div>
 			<ToastContainer/>
-			{users.length}
+			{user.length}
 			{
-				users.map(name=><p key={name.id}>{name.name} {name.email} <button onClick={()=>handleDel(name._id)}>X</button></p>)
+				user.map(name=><p key={name.id}>{name.name} {name.email} <button onClick={()=>handleDel(name._id)}>X</button></p>)
 			}
 		</div>
 	);
