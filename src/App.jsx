@@ -35,8 +35,8 @@ function App() {
     <>
     <ToastContainer/>
      <form onSubmit={handleSubmit}>
-      <input type="text" name="name" id="name" placeholder='enter your name' />
-      <input type="email" name="email" id="email" placeholder='enter your name' />
+      <input type="text" name="name" id="name" placeholder='enter your name' required />
+      <input type="email" name="email" id="email" placeholder='enter your name'  required />
       <input type="submit" value="add user" />
 
 

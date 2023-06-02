@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
 
@@ -26,7 +26,7 @@ const Users = () => {
 			<ToastContainer/>
 			{user.length}
 			{
-				user.map(name=><p key={name.id}>{name.name} {name.email} <button onClick={()=>handleDel(name._id)}>X</button></p>)
+				user.map(name=><p key={name._id}>{name.name} {name.email} : {name._id} <Link to={`/update/${name._id}`}> <button type="btn"> update</button> </Link> <button onClick={()=>handleDel(name._id)}>X</button></p>)
 			}
 		</div>
 	);
